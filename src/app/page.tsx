@@ -1,6 +1,10 @@
+import GrantStatusTracker from "@/components/ui/GrantStatusTracker";
+import { StrictMode } from "react";
+
 export default function Home() {
   return (
-    <div>
-    </div>
-  );
+    <StrictMode>
+      <GrantStatusTracker />;
+    </StrictMode>
+  )
 }
