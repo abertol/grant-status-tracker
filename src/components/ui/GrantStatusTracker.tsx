@@ -1,6 +1,9 @@
 "use client";
 
 import { Grid, Typography } from "@mui/material";
+import GrantsTable from "../grants/GrantsTable";
+import data from "../../../db.js";
+import { Grant } from "@/types/grant";
 
 export default function GrantStatusTracker() {
     return (
@@ -12,6 +15,8 @@ export default function GrantStatusTracker() {
                     fontFamily: theme.typography.fontFamily,
                 })}>
                     Grant Status Tracker
+
+                    <GrantsTable grants={data.grants as Grant[]} />
                 </Typography>
             </Grid>
         </Grid>
