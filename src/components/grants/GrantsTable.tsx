@@ -1,13 +1,13 @@
 "use client";
 
-import { Grant } from "@/types/grant";
+import { Activity, Grant, Organization } from "@/types/grant";
 import { Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import { useState } from "react";
 
 export interface GrantsTableProps {
-    grants: Grant[];
+    data: { grants: Grant[], organizations: Organization[], activities: Activity[] };
 }
 
 const tableHeads = [
@@ -22,8 +22,13 @@ const tableHeads = [
     'Updated At'
 ] as string[];
 
-const GrantsTable = ({ grants }: GrantsTableProps) => {
+const GrantsTable = ({ data }: GrantsTableProps) => {
+    const { grants, organizations } = data;
     const [expandedRows, setExpandedRows] = useState<number[]>([]);
+
+    const fetchOrganizationById = (organizationId: number) => {
+        return organizations.find((org) => org.id === organizationId) as Organization;
+    }
 
     const handleRowExpand = (grantId: number) => {
         setExpandedRows((prev) => {
@@ -64,7 +69,7 @@ const GrantsTable = ({ grants }: GrantsTableProps) => {
                                     </Grid>
                                 </TableCell>
                                 <TableCell align="left">{grant.amount_in_cents}</TableCell>
-                                <TableCell align="left">{grant.organization_id}</TableCell>
+                                <TableCell align="left">{fetchOrganizationById(grant.organization_id)?.name}</TableCell>
                                 <TableCell align="left">{grant.is_reviewed}</TableCell>
                                 <TableCell align="left">{grant.status}</TableCell>
                                 <TableCell align="left">{grant.modality}</TableCell>

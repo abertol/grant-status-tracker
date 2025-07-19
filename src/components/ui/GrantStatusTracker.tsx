@@ -3,7 +3,7 @@
 import { Grid, Typography } from "@mui/material";
 import GrantsTable from "../grants/GrantsTable";
 import data from "../../../db.js";
-import { Grant } from "@/types/grant";
+import { Activity, Grant, Organization } from "@/types/grant";
 
 export default function GrantStatusTracker() {
     return (
@@ -16,7 +16,7 @@ export default function GrantStatusTracker() {
                 })}>
                     Grant Status Tracker
 
-                    <GrantsTable grants={data.grants as Grant[]} />
+                    <GrantsTable data={data as { grants: Grant[], organizations: Organization[], activities: Activity[] }} />
                 </Typography>
             </Grid>
         </Grid>
